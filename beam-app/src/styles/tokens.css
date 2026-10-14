@@ -1,0 +1,262 @@
+/*
+ * Beam design tokens — the single owning definition.
+ *
+ * Source: the Beam theme reference in gui/themes/beam.md, plus the deliberate
+ * local changes recorded in src/content/docs/foundations/theming.md.
+ * Literal values live here only. Components consume the named variables.
+ *
+ * Modes: set data-theme="light" or data-theme="dark" on <html> (or on any
+ * element to scope a region). Every mode-dependent value is declared on the
+ * same element as its aliases, so a nested data-theme scope resolves correctly.
+ *
+ * [data-beam] marks a region that must use Beam's own values in the page's
+ * current mode, whatever an ancestor (such as the style guide) has replaced.
+ * It is resolved in CSS, so it is right on first paint.
+ */
+
+/*
+ * Radius, tracking and font families use names Tailwind also reads, so they are
+ * declared in an @theme block: one definition serves both the CSS variable
+ * (--radius-m) and the utility (rounded-m).
+ */
+@theme {
+  --radius-*: initial;
+  --tracking-*: initial;
+  --font-*: initial;
+
+  --radius-zero: 0px;
+  --radius-xs: 2px;
+  --radius-s: 4px;
+  --radius-m: 6px;
+  --radius-l: 12px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  --tracking-xs: -0.02em;
+  --tracking-s: -0.01em;
+  --tracking-m: 0em;
+  --tracking-l: 0.01em;
+  --tracking-xl: 0.02em;
+
+  --font-ui: var(--font-geist-sans), sans-serif;
+  --font-brand: var(--font-geist-sans), sans-serif;
+  --font-editorial: var(--font-geist-sans), sans-serif;
+  --font-data: var(--font-geist-mono), monospace;
+}
+
+/* ---------- mode-independent primitives ---------- */
+:root {
+  --theme-name: Beam;
+
+  /* Palette and status */
+  --color-none: transparent;
+  --color-1: #ff6363;
+  --color-2: #76ef6b;
+  --color-3: #009ff0;
+  --color-4: #e864ff;
+  --success: #76ef6b;
+  --warning: #ffa344;
+  --error: #ff5263;
+
+  /* Spacing */
+  --space-zero: 0px;
+  --space-xxs: 3px;
+  --space-xs: 6px;
+  --space-s: 9px;
+  --space-m: 11px;
+  --space-l: 17px;
+  --space-xl: 23px;
+  --space-xxl: 34px;
+
+  /* Type scale */
+  --size-xxs: 9px;
+  --line-xxs: 12px;
+  --size-xs: 11px;
+  --line-xs: 14px;
+  --size-s: 12px;
+  --line-s: 18px;
+  --size-m: 14px;
+  --line-m: 21px;
+  --size-l: 21px;
+  --line-l: 28px;
+  --size-xl: 32px;
+  --line-xl: 35px;
+  --size-xxl: 43px;
+  --line-xxl: 46px;
+
+  /* Default tracking for each text size */
+  --letter-spacing-xxs: var(--tracking-xl);
+  --letter-spacing-xs: var(--tracking-l);
+  --letter-spacing-s: var(--tracking-l);
+  --letter-spacing-m: var(--tracking-m);
+  --letter-spacing-l: var(--tracking-s);
+  --letter-spacing-xl: var(--tracking-s);
+  --letter-spacing-xxl: var(--tracking-xs);
+
+  /* Weights, per font role */
+  --weight-ui-regular: 500;
+  --weight-ui-medium: 600;
+  --weight-ui-heavy: 800;
+  --weight-brand-regular: 500;
+  --weight-brand-medium: 600;
+  --weight-brand-heavy: 800;
+  --weight-editorial-regular: 500;
+  --weight-editorial-medium: 600;
+  --weight-editorial-heavy: 800;
+  --weight-data-regular: 500;
+  --weight-data-medium: 600;
+  --weight-data-heavy: 800;
+
+  /* Edge widths */
+  --border-none: 0px;
+  --border-s: 1px;
+  --border-m: 1px;
+  --border-l: 2px;
+
+  /* Elevation (flat as authored) */
+  --shadow-none: none;
+  --shadow-s: 0px 1px 2px 0px #00000000;
+  --shadow-m: 0px 8px 24px 0px #00000000;
+  --shadow-l: 0px 12px 30px 0px #00000000;
+
+  /* Icons */
+  --theme-icon-family: Lucide;
+  --theme-icon-style: outlined;
+  --icon-stroke-width: 2.5;
+
+  /* Motion */
+  --motion-duration: 150ms;
+  --motion-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-large-duration: 300ms;
+  --motion-large-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-popup-scale: 0.96;
+  --motion-press-distance: 1px;
+
+  /* Navigation: the current page */
+  --navigation-active-background: var(--color-1);
+  --navigation-active-foreground: #000000;
+}
+
+/* ---------- light neutrals ---------- */
+:root,
+[data-theme="light"],
+[data-theme="light"] [data-beam] {
+  color-scheme: light;
+  --neutral-1: #ffffff;
+  --neutral-2: #fafaf9;
+  --neutral-3: #f2f0ec;
+  --neutral-4: #e1ddd5;
+  --neutral-5: #cbc5b9;
+  --neutral-6: #9b968a;
+  --neutral-7: #716c61;
+  --neutral-8: #4a453b;
+  --neutral-9: #29241b;
+  --neutral-10: #000000;
+}
+
+/* ---------- dark neutrals (rebased on #0f0f0f) ---------- */
+[data-theme="dark"],
+[data-theme="dark"] [data-beam] {
+  color-scheme: dark;
+  --neutral-1: #0f0f0f;
+  --neutral-2: #2e2d2a;
+  --neutral-3: #383735;
+  --neutral-4: #454441;
+  --neutral-5: #5c5a57;
+  --neutral-6: #817f7b;
+  --neutral-7: #aaa8a5;
+  --neutral-8: #cbc9c6;
+  --neutral-9: #e7e7e5;
+  --neutral-10: #ffffff;
+}
+
+/* ---------- derived values and semantic roles (resolve per scope) ---------- */
+:root,
+[data-theme],
+[data-beam],
+.guide {
+  /* 20% counterparts */
+  --color-1-transparent: color-mix(in srgb, var(--color-1) 20%, transparent);
+  --color-2-transparent: color-mix(in srgb, var(--color-2) 20%, transparent);
+  --color-3-transparent: color-mix(in srgb, var(--color-3) 20%, transparent);
+  --color-4-transparent: color-mix(in srgb, var(--color-4) 20%, transparent);
+  --success-transparent: color-mix(in srgb, var(--success) 20%, transparent);
+  --warning-transparent: color-mix(in srgb, var(--warning) 20%, transparent);
+  --error-transparent: color-mix(in srgb, var(--error) 20%, transparent);
+  --neutral-1-transparent: color-mix(in srgb, var(--neutral-1) 20%, transparent);
+  --neutral-2-transparent: color-mix(in srgb, var(--neutral-2) 20%, transparent);
+  --neutral-3-transparent: color-mix(in srgb, var(--neutral-3) 20%, transparent);
+  --neutral-4-transparent: color-mix(in srgb, var(--neutral-4) 20%, transparent);
+  --neutral-5-transparent: color-mix(in srgb, var(--neutral-5) 20%, transparent);
+  --neutral-6-transparent: color-mix(in srgb, var(--neutral-6) 20%, transparent);
+  --neutral-7-transparent: color-mix(in srgb, var(--neutral-7) 20%, transparent);
+  --neutral-8-transparent: color-mix(in srgb, var(--neutral-8) 20%, transparent);
+  --neutral-9-transparent: color-mix(in srgb, var(--neutral-9) 20%, transparent);
+  --neutral-10-transparent: color-mix(in srgb, var(--neutral-10) 20%, transparent);
+
+  /* Edges are box-shadows, never border strokes */
+  --border-default-color: rgb(0 0 0 / 0.1);
+  --border-shadow-none: 0 0 0 0 transparent;
+  --border-shadow-s: 0 0 0 var(--border-s) var(--border-default-color);
+  --border-shadow-m: 0 0 0 var(--border-m) var(--border-default-color);
+  --border-shadow-l: 0 0 0 var(--border-l) var(--border-default-color);
+  --focus-ring-outline: 2px solid color-mix(in srgb, var(--neutral-10) 50%, transparent);
+
+  /* Backgrounds */
+  --bg-canvas: var(--neutral-1);
+  --bg-surface: var(--neutral-2);
+  --bg-surface-muted: var(--neutral-3);
+  --bg-control: var(--neutral-1);
+  --bg-popover: var(--neutral-1);
+  --bg-hover: var(--neutral-3-transparent);
+  --bg-hover-strong: var(--neutral-4-transparent);
+  --bg-highlight: var(--neutral-3);
+  --bg-disabled: var(--neutral-3);
+  --bg-track: var(--neutral-4);
+  --bg-thumb: var(--neutral-1);
+  --bg-inverse: var(--neutral-10);
+  --bg-backdrop: var(--neutral-10-transparent);
+
+  /* Text */
+  --text: var(--neutral-10);
+  --text-secondary: var(--neutral-8);
+  --text-muted: var(--neutral-7);
+  --text-subtle: var(--neutral-6);
+  --text-disabled: var(--neutral-6);
+  --text-on-accent: var(--neutral-1);
+  --text-inverse: var(--neutral-1);
+  --text-selected: var(--neutral-10);
+  /* Status colours used as text. On light they are mixed toward the text colour so they stay readable; fills and dots keep the pure status colour. */
+  --text-success: color-mix(in srgb, var(--success) 45%, var(--neutral-10));
+  --text-warning: color-mix(in srgb, var(--warning) 55%, var(--neutral-10));
+  --text-danger: color-mix(in srgb, var(--error) 75%, var(--neutral-10));
+
+  /* Edges */
+  --border: var(--neutral-4);
+  --border-strong: var(--neutral-5);
+  --border-subtle: var(--border-default-color);
+  --border-disabled: var(--neutral-4-transparent);
+  --focus-ring: color-mix(in srgb, var(--neutral-10) 50%, transparent);
+
+  /* Accent and status */
+  --accent: var(--color-1);
+  --accent-muted: var(--color-1-transparent);
+  --success-muted: var(--success-transparent);
+  --warning-muted: var(--warning-transparent);
+  --danger: var(--error);
+  --danger-muted: var(--error-transparent);
+}
+
+/* ---------- what differs in dark ---------- */
+[data-theme="dark"],
+[data-theme="dark"] [data-beam],
+[data-theme="dark"] .guide {
+  --border-default-color: var(--neutral-10-transparent);
+  --bg-control: var(--neutral-2);
+  --bg-popover: var(--neutral-2);
+  --bg-backdrop: var(--neutral-1-transparent);
+  --text-selected: var(--color-1);
+  --text-success: var(--success);
+  --text-warning: var(--warning);
+  --text-danger: var(--error);
+}

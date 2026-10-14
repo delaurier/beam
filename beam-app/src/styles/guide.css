@@ -1,0 +1,70 @@
+/*
+ * Style-guide chrome only. NOT Beam tokens.
+ *
+ * The documentation site sits on a neutral charcoal so the product's own
+ * colours can be judged against something quiet. Inside the guide, the neutral
+ * ramp is replaced with the values below. Every live example is wrapped in a
+ * [data-beam] stage, which restores Beam's real ramp from tokens.css.
+ */
+[data-theme="dark"] .guide {
+  --neutral-1: #1b1b1b;
+  --neutral-2: #212121;
+  --neutral-3: #292929;
+  --neutral-4: #323232;
+  --neutral-5: #474747;
+  --neutral-6: #787878;
+  --neutral-7: #a1a1a1;
+  --neutral-8: #c6c6c6;
+  --neutral-9: #e6e6e6;
+  --neutral-10: #ffffff;
+}
+[data-theme="light"] .guide {
+  --neutral-1: #ffffff;
+  --neutral-2: #f8f8f8;
+  --neutral-3: #f1f1f1;
+  --neutral-4: #e5e5e5;
+  --neutral-5: #cfcfcf;
+  --neutral-6: #9c9c9c;
+  --neutral-7: #6f6f6f;
+  --neutral-8: #474747;
+  --neutral-9: #262626;
+  --neutral-10: #000000;
+}
+
+/* Dotted stage behind live examples */
+@utility stage-dots {
+  /* 31.5% of the edge colour: 58% less contrast than the edge, then 25% less again */
+  background-image: radial-gradient(color-mix(in srgb, var(--border) 31.5%, var(--bg-canvas)) 1px, transparent 1px);
+  background-size: var(--space-l) var(--space-l);
+  background-position: center;
+}
+
+/*
+ * Controls in an example are backed by the canvas in their own shape, so the dots never show through a
+ * transparent control and no box is drawn around the example. The backing sits under the control's own
+ * fill (the stage is a stacking context), so hover and pressed tints still read correctly.
+ */
+[data-stage-content] :where(button, a, [role="group"], [role="tablist"]) {
+  position: relative;
+}
+[data-stage-content] :where(button, a, [role="group"], [role="tablist"])::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--bg-canvas);
+  pointer-events: none;
+}
+
+/* Lets the docs draw a forced focus state */
+[data-force="focus"] {
+  outline: var(--focus-ring-outline);
+}
+
+/* Code colours, taken from Beam's palette */
+.syn-k { color: var(--color-1); }
+.syn-s { color: var(--color-3); }
+.syn-c { color: var(--text-subtle); }
+.syn-t { color: var(--color-4); }
+.syn-n { color: var(--color-2); }

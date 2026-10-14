@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Beam — Ask</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{--bg:#07080A;--s1:#0C0D0F;--s2:#111214;--s3:#1B1C1E;--s4:#2F3031;--bd:rgba(255,255,255,.08);--bds:rgba(255,255,255,.14);
+--t1:#F4F4F6;--t2:#C2C7CA;--t3:#78787C;--t4:#5E6366;--acc:#FF6363;--info:#56C2FF;--suc:#59D498;--warn:#FFC533;--dng:#FF6161;
+--sans:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:402px;height:874px;overflow:hidden;background:transparent;}
+body{display:block;}
+.phone{position:relative;width:402px;height:874px;background:var(--bg);overflow:hidden;font-family:var(--sans);}
+.status{display:flex;align-items:center;justify-content:space-between;height:54px;padding:18px 28px 0;}
+.status .time{font-size:15px;font-weight:600;color:var(--t1);}
+.status .right{display:flex;align-items:center;gap:6px;}
+.status .net{font-family:var(--mono);font-size:11px;color:var(--t2);}
+.batt{width:24px;height:12px;border:1px solid var(--bds);border-radius:3px;padding:1.5px;}.batt div{width:70%;height:100%;background:var(--t2);border-radius:1.5px;}
+.hdr{display:flex;align-items:center;gap:11px;padding:14px 22px 8px;}
+.spark{width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(135deg,#FF6363,#B84FA0);color:#fff;font-size:16px;}
+.hdr .ttl h1{font-size:19px;letter-spacing:-.02em;font-weight:600;color:var(--t1);}
+.hdr .ttl .ctx{font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--t3);margin-top:2px;}
+.thread{display:flex;flex-direction:column;gap:16px;padding:18px 22px 0;}
+.q{align-self:flex-end;max-width:82%;padding:12px 15px;border-radius:16px 16px 5px 16px;background:var(--s3);border:1px solid var(--bd);font-size:14px;line-height:20px;color:var(--t1);}
+.a{display:flex;flex-direction:column;gap:12px;max-width:92%;}
+.a .line{font-size:14px;line-height:21px;color:var(--t2);}
+.a .line b{color:var(--t1);font-weight:600;}
+.rcard{display:flex;flex-direction:column;gap:2px;border:1px solid var(--bd);border-radius:14px;overflow:hidden;background:var(--s1);}
+.rrow{display:flex;align-items:center;gap:11px;padding:12px 14px;}
+.rrow+.rrow{border-top:1px solid var(--bd);}
+.rrow i{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.rrow .b{flex:1;}
+.rrow .b .t{font-size:14px;font-weight:500;color:var(--t1);}
+.rrow .b .s{font-size:11px;color:var(--t3);margin-top:1px;}
+.rrow .pct{font-family:var(--mono);font-size:13px;color:var(--t2);}
+.rrow .pct.dng{color:var(--dng);}.rrow .pct.warn{color:var(--warn);}
+.chips{display:flex;gap:9px;margin-top:2px;}
+.chip{display:flex;align-items:center;height:38px;padding:0 17px;border-radius:10px;font-size:13px;font-weight:500;}
+.chip.primary{background:rgba(255,255,255,.9);color:#18191A;box-shadow:inset 0 1px 1px rgba(255,255,255,.35);}
+.chip.ghost{background:var(--s2);border:1px solid var(--bds);color:var(--t2);}
+.ask{position:absolute;left:22px;bottom:34px;width:358px;display:flex;align-items:center;gap:11px;height:54px;padding:0 18px;border-radius:999px;
+ background:linear-gradient(137deg,rgba(27,28,30,.92),rgba(12,13,15,.94));border:1px solid var(--bds);
+ box-shadow:0 12px 40px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);}
+.ask .g{width:16px;height:16px;flex-shrink:0;border:1.5px solid var(--t3);border-radius:50%;}
+.ask .ph{flex:1;font-size:14px;color:var(--t3);}
+.mic{display:flex;align-items:flex-end;gap:2px;height:16px;}
+.mic span{width:2.5px;border-radius:2px;background:var(--acc);}
+.mic span:nth-child(1){height:7px;}.mic span:nth-child(2){height:14px;}.mic span:nth-child(3){height:10px;}.mic span:nth-child(4){height:15px;}.mic span:nth-child(5){height:6px;}
+.home{position:absolute;left:134px;bottom:9px;width:134px;height:5px;border-radius:999px;background:rgba(255,255,255,.25);}
+</style></head><body>
+<div class="phone">
+  <div class="status"><div class="time">9:41</div><div class="right"><div class="net">5G</div><div class="batt"><div></div></div></div></div>
+  <div class="hdr">
+    <div class="spark">✳</div>
+    <div class="ttl"><h1>Ask Beam</h1><div class="ctx">CONTEXT · NORTH FARM · 6 FIELDS</div></div>
+  </div>
+  <div class="thread">
+    <div class="q">Which fields need water before the frost tonight?</div>
+    <div class="a">
+      <div class="line">Two fields are below your moisture floor with frost expected at <b>4:00am</b>:</div>
+      <div class="rcard">
+        <div class="rrow"><i style="background:var(--dng);"></i><div class="b"><div class="t">Orchard Block · Apple</div><div class="s">Frost-sensitive · low 34°F</div></div><div class="pct dng">27%</div></div>
+        <div class="rrow"><i style="background:var(--warn);"></i><div class="b"><div class="t">Creek Bend · Wheat</div><div class="s">Dry zone forming · NE corner</div></div><div class="pct warn">22%</div></div>
+      </div>
+      <div class="line">Watering now also raises canopy temp ~2°F, enough to clear the frost line. Want me to schedule both before midnight?</div>
+      <div class="chips"><div class="chip primary">Schedule both</div><div class="chip ghost">Just Orchard</div></div>
+    </div>
+  </div>
+  <div class="ask"><div class="g"></div><div class="ph">Ask Beam anything…</div><div class="mic"><span></span><span></span><span></span><span></span><span></span></div></div>
+  <div class="home"></div>
+</div></body></html>

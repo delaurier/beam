@@ -1,0 +1,195 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/guide.css";
+
+/*
+ * Tailwind is wired to Beam's tokens only. The default palette, type scale,
+ * radii, tracking, weights and shadows are removed so a utility can only
+ * resolve to a Beam token. Numeric spacing stays for structural layout
+ * (widths, grid tracks); padding, gaps and margins inside components use the
+ * named steps (p-m, gap-s, ...).
+ */
+@theme {
+  --color-*: initial;
+  --text-*: initial;
+  --font-weight-*: initial;
+  --leading-*: initial;
+  --shadow-*: initial;
+}
+
+@theme inline {
+  /* Spacing: p-xs, gap-m, ... */
+  --spacing-zero: var(--space-zero);
+  --spacing-xxs: var(--space-xxs);
+  --spacing-xs: var(--space-xs);
+  --spacing-s: var(--space-s);
+  --spacing-m: var(--space-m);
+  --spacing-l: var(--space-l);
+  --spacing-xl: var(--space-xl);
+  --spacing-xxl: var(--space-xxl);
+
+  /* Type: text-m sets size, line height and tracking together */
+  --text-xxs: var(--size-xxs);
+  --text-xxs--line-height: var(--line-xxs);
+  --text-xxs--letter-spacing: var(--letter-spacing-xxs);
+  --text-xs: var(--size-xs);
+  --text-xs--line-height: var(--line-xs);
+  --text-xs--letter-spacing: var(--letter-spacing-xs);
+  --text-s: var(--size-s);
+  --text-s--line-height: var(--line-s);
+  --text-s--letter-spacing: var(--letter-spacing-s);
+  --text-m: var(--size-m);
+  --text-m--line-height: var(--line-m);
+  --text-m--letter-spacing: var(--letter-spacing-m);
+  --text-l: var(--size-l);
+  --text-l--line-height: var(--line-l);
+  --text-l--letter-spacing: var(--letter-spacing-l);
+  --text-xl: var(--size-xl);
+  --text-xl--line-height: var(--line-xl);
+  --text-xl--letter-spacing: var(--letter-spacing-xl);
+  --text-xxl: var(--size-xxl);
+  --text-xxl--line-height: var(--line-xxl);
+  --text-xxl--letter-spacing: var(--letter-spacing-xxl);
+
+  /* Weights: font-ui-medium, font-data-regular, ... */
+  --font-weight-ui-regular: var(--weight-ui-regular);
+  --font-weight-ui-medium: var(--weight-ui-medium);
+  --font-weight-ui-heavy: var(--weight-ui-heavy);
+  --font-weight-brand-regular: var(--weight-brand-regular);
+  --font-weight-brand-medium: var(--weight-brand-medium);
+  --font-weight-brand-heavy: var(--weight-brand-heavy);
+  --font-weight-editorial-regular: var(--weight-editorial-regular);
+  --font-weight-editorial-medium: var(--weight-editorial-medium);
+  --font-weight-editorial-heavy: var(--weight-editorial-heavy);
+  --font-weight-data-regular: var(--weight-data-regular);
+  --font-weight-data-medium: var(--weight-data-medium);
+  --font-weight-data-heavy: var(--weight-data-heavy);
+
+  /* Colour roles: bg-canvas, text-fg-muted, ... */
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-surface-muted: var(--bg-surface-muted);
+  --color-control: var(--bg-control);
+  --color-popover: var(--bg-popover);
+  --color-hover: var(--bg-hover);
+  --color-hover-strong: var(--bg-hover-strong);
+  --color-highlight: var(--bg-highlight);
+  --color-disabled: var(--bg-disabled);
+  --color-track: var(--bg-track);
+  --color-thumb: var(--bg-thumb);
+  --color-inverse: var(--bg-inverse);
+  --color-backdrop: var(--bg-backdrop);
+  --color-fg: var(--text);
+  --color-fg-secondary: var(--text-secondary);
+  --color-fg-muted: var(--text-muted);
+  --color-fg-subtle: var(--text-subtle);
+  --color-fg-disabled: var(--text-disabled);
+  --color-fg-on-accent: var(--text-on-accent);
+  --color-fg-inverse: var(--text-inverse);
+  --color-fg-selected: var(--text-selected);
+  --color-fg-success: var(--text-success);
+  --color-fg-warning: var(--text-warning);
+  --color-fg-danger: var(--text-danger);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-line-subtle: var(--border-subtle);
+  --color-line-disabled: var(--border-disabled);
+  --color-accent: var(--accent);
+  --color-accent-muted: var(--accent-muted);
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+  --color-warning: var(--warning);
+  --color-warning-muted: var(--warning-muted);
+  --color-danger: var(--danger);
+  --color-danger-muted: var(--danger-muted);
+  --color-nav-active: var(--navigation-active-background);
+  --color-nav-active-fg: var(--navigation-active-foreground);
+  --color-palette-1: var(--color-1);
+  --color-palette-2: var(--color-2);
+  --color-palette-3: var(--color-3);
+  --color-palette-4: var(--color-4);
+}
+
+/* ---------- base ---------- */
+html {
+  background: var(--bg-canvas);
+}
+
+body {
+  background: var(--bg-canvas);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-weight: var(--weight-ui-regular);
+  font-size: var(--size-m);
+  line-height: var(--line-m);
+  letter-spacing: var(--letter-spacing-m);
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: var(--focus-ring-outline);
+  outline-offset: 0;
+}
+
+/* ---------- edges (box-shadows, zero native border width) ---------- */
+@utility edge {
+  box-shadow: var(--border-shadow-s);
+}
+@utility edge-inset {
+  box-shadow: inset 0 0 0 var(--border-s) var(--border-default-color);
+}
+@utility edge-solid {
+  box-shadow: inset 0 0 0 var(--border-s) var(--border);
+}
+@utility edge-danger {
+  box-shadow: 0 0 0 var(--border-s) var(--danger);
+}
+/* An edge drawn above the element's children, for rounded containers whose content has its own fill.
+   An ordinary inset edge is painted under the children and disappears wherever they cover it. */
+@utility edge-solid-over {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 var(--border-s) var(--border);
+    pointer-events: none;
+  }
+}
+@utility divider-rb {
+  box-shadow:
+    inset calc(var(--border-s) * -1) 0 0 var(--border),
+    inset 0 calc(var(--border-s) * -1) 0 var(--border);
+}
+@utility divider-b {
+  box-shadow: inset 0 calc(var(--border-s) * -1) 0 var(--border);
+}
+@utility divider-t {
+  box-shadow: inset 0 var(--border-s) 0 var(--border);
+}
+@utility divider-r {
+  box-shadow: inset calc(var(--border-s) * -1) 0 0 var(--border);
+}
+@utility divider-l {
+  box-shadow: inset var(--border-s) 0 0 var(--border);
+}
+
+/* ---------- motion roles ---------- */
+@utility motion-small {
+  transition-duration: var(--motion-duration);
+  transition-timing-function: var(--motion-easing);
+}
+@utility motion-large {
+  transition-duration: var(--motion-large-duration);
+  transition-timing-function: var(--motion-large-easing);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}

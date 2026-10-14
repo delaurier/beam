@@ -1,0 +1,92 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Beam — Field Detail</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{--bg:#07080A;--s1:#0C0D0F;--s2:#111214;--s3:#1B1C1E;--s4:#2F3031;--bd:rgba(255,255,255,.08);--bds:rgba(255,255,255,.14);
+--t1:#F4F4F6;--t2:#C2C7CA;--t3:#78787C;--t4:#5E6366;--acc:#FF6363;--info:#56C2FF;--suc:#59D498;--warn:#FFC533;--dng:#FF6161;
+--sans:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:402px;height:874px;overflow:hidden;background:transparent;}
+body{display:block;}
+.phone{position:relative;width:402px;height:874px;background:var(--bg);overflow:hidden;font-family:var(--sans);}
+.status{display:flex;align-items:center;justify-content:space-between;height:54px;padding:18px 28px 0;}
+.status .time{font-size:15px;font-weight:600;color:var(--t1);}
+.status .right{display:flex;align-items:center;gap:6px;}
+.status .net{font-family:var(--mono);font-size:11px;color:var(--t2);}
+.batt{width:24px;height:12px;border:1px solid var(--bds);border-radius:3px;padding:1.5px;}.batt div{width:70%;height:100%;background:var(--t2);border-radius:1.5px;}
+.hdr{display:flex;align-items:center;gap:12px;padding:14px 20px 10px;}
+.back{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:10px;background:var(--s2);border:1px solid var(--bd);color:var(--t2);font-size:18px;}
+.hdr .ttl{flex:1;}
+.hdr .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--t3);margin-bottom:3px;}
+.hdr h1{font-size:22px;line-height:24px;letter-spacing:-.02em;font-weight:600;color:var(--t1);}
+.live{display:flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:999px;background:rgba(89,212,152,.18);}
+.live i{width:6px;height:6px;border-radius:50%;background:var(--suc);}.live span{font-family:var(--mono);font-size:10px;color:var(--suc);}
+.map{position:relative;height:392px;margin:6px 20px 0;border-radius:18px;overflow:hidden;border:1px solid var(--bds);background:radial-gradient(120% 90% at 30% 20%,#122a1c 0%,#0c1a12 55%,#080d0a 100%);}
+.rows{position:absolute;inset:0;opacity:.5;}
+.chip-legend{position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:8px;padding:7px 11px;border-radius:10px;background:rgba(7,8,10,.72);border:1px solid var(--bd);backdrop-filter:blur(8px);}
+.chip-legend .grad{width:64px;height:7px;border-radius:999px;background:linear-gradient(90deg,#FFC533,#8a7a3a 40%,#2f7a53 70%,#59D498);}
+.chip-legend .lb{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:.04em;}
+.zone-tag{position:absolute;padding:3px 8px;border-radius:999px;font-family:var(--mono);font-size:9px;letter-spacing:.04em;background:rgba(7,8,10,.6);border:1px solid var(--bd);color:var(--t2);backdrop-filter:blur(6px);}
+.pin{position:absolute;transform:translate(-50%,-50%);}
+.pin .dot{width:12px;height:12px;border-radius:50%;border:2px solid #07080A;}
+.pin .ring{position:absolute;inset:-6px;border-radius:50%;border:1.5px solid currentColor;opacity:.4;}
+.callout{position:absolute;transform:translate(-50%,-140%);display:flex;flex-direction:column;gap:1px;padding:8px 11px;border-radius:12px;background:rgba(12,13,15,.92);border:1px solid var(--bds);backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.5);white-space:nowrap;}
+.callout .id{font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:.04em;}
+.callout .v{font-size:16px;font-weight:600;color:var(--t1);}
+.callout .v b{color:var(--suc);font-weight:600;}
+.callout:after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:rgba(12,13,15,.92);border-right:1px solid var(--bds);border-bottom:1px solid var(--bds);}
+.stats{display:flex;gap:10px;padding:16px 20px 0;}
+.stat{flex:1;display:flex;flex-direction:column;gap:4px;padding:12px 13px;background:var(--s1);border:1px solid var(--bd);border-radius:12px;}
+.stat .l{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--t3);}
+.stat .n{font-size:20px;line-height:22px;letter-spacing:-.02em;font-weight:600;color:var(--t1);}
+.stat .c{font-size:10px;color:var(--t3);}.stat .c.warn{color:var(--warn);}
+.act{display:flex;align-items:center;gap:10px;margin:16px 20px 0;padding:14px 16px;background:rgba(255,197,51,.07);border:1px solid rgba(255,197,51,.28);border-radius:14px;}
+.act .ico{font-size:16px;}
+.act .txt{flex:1;}.act .txt .t{font-size:14px;font-weight:500;color:var(--t1);}.act .txt .s{font-size:11px;color:var(--warn);margin-top:1px;}
+.btn{display:flex;align-items:center;justify-content:center;height:34px;padding:0 15px;border-radius:9px;background:rgba(255,255,255,.9);color:#18191A;font-size:12px;font-weight:500;box-shadow:inset 0 1px 1px rgba(255,255,255,.35);flex-shrink:0;}
+.home{position:absolute;left:134px;bottom:9px;width:134px;height:5px;border-radius:999px;background:rgba(255,255,255,.25);}
+</style></head><body>
+<div class="phone">
+  <div class="status"><div class="time">9:41</div><div class="right"><div class="net">5G</div><div class="batt"><div></div></div></div></div>
+  <div class="hdr">
+    <div class="back">‹</div>
+    <div class="ttl"><div class="eyebrow">FIELD · 64 AC</div><h1>North Quarter</h1></div>
+    <div class="live"><i></i><span>LIVE</span></div>
+  </div>
+  <div class="map">
+    <svg class="rows" width="362" height="392" viewBox="0 0 362 392" preserveAspectRatio="none">
+      <defs>
+        <radialGradient id="wet" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#59D498" stop-opacity=".55"/><stop offset="100%" stop-color="#59D498" stop-opacity="0"/></radialGradient>
+        <radialGradient id="dry" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFC533" stop-opacity=".5"/><stop offset="100%" stop-color="#FFC533" stop-opacity="0"/></radialGradient>
+      </defs>
+      <ellipse cx="120" cy="150" rx="130" ry="110" fill="url(#wet)"/>
+      <ellipse cx="285" cy="300" rx="95" ry="85" fill="url(#dry)"/>
+      <g stroke="#3a5a44" stroke-width="1" opacity=".55">
+        <line x1="-20" y1="40" x2="382" y2="90"/><line x1="-20" y1="80" x2="382" y2="130"/><line x1="-20" y1="120" x2="382" y2="170"/>
+        <line x1="-20" y1="160" x2="382" y2="210"/><line x1="-20" y1="200" x2="382" y2="250"/><line x1="-20" y1="240" x2="382" y2="290"/>
+        <line x1="-20" y1="280" x2="382" y2="330"/><line x1="-20" y1="320" x2="382" y2="370"/><line x1="-20" y1="360" x2="382" y2="410"/>
+      </g>
+      <path d="M235 150 L362 130 L362 392 L200 392 Z" fill="#07080A" opacity=".28"/>
+      <path d="M235 150 L362 130" stroke="#59D498" stroke-width="1.5" opacity=".4" stroke-dasharray="4 5"/>
+    </svg>
+    <div class="zone-tag" style="left:40px;top:34px;">ZONE 4 · HEALTHY</div>
+    <div class="zone-tag" style="right:20px;bottom:120px;color:var(--warn);border-color:rgba(255,197,51,.3);">DRY ZONE · NE</div>
+    <div class="pin" style="left:120px;top:150px;color:var(--suc);"><div class="ring"></div><div class="dot" style="background:var(--suc);"></div></div>
+    <div class="pin" style="left:70px;top:250px;color:var(--suc);"><div class="ring"></div><div class="dot" style="background:var(--suc);"></div></div>
+    <div class="pin" style="left:175px;top:315px;color:var(--suc);"><div class="ring"></div><div class="dot" style="background:var(--suc);"></div></div>
+    <div class="pin" style="left:285px;top:300px;color:var(--warn);"><div class="ring"></div><div class="dot" style="background:var(--warn);"></div></div>
+    <div class="pin" style="left:310px;top:210px;color:var(--warn);"><div class="ring"></div><div class="dot" style="background:var(--warn);"></div></div>
+    <div class="callout" style="left:205px;top:110px;"><div class="id">SENSOR S-07 · MOISTURE</div><div class="v"><b>34%</b> · optimal</div></div>
+    <div class="chip-legend"><span class="lb">DRY</span><span class="grad"></span><span class="lb">WET</span></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="l">AVG MOISTURE</div><div class="n">31%</div><div class="c">across 12 sensors</div></div>
+    <div class="stat"><div class="l">DRY ZONES</div><div class="n">1</div><div class="c warn">NE corner · 22%</div></div>
+    <div class="stat"><div class="l">CANOPY</div><div class="n">0.72</div><div class="c">NDVI healthy</div></div>
+  </div>
+  <div class="act">
+    <div class="ico">💧</div>
+    <div class="txt"><div class="t">Dry zone forming in NE corner</div><div class="s">Irrigation window opens in 2h 10m</div></div>
+    <div class="btn">Schedule</div>
+  </div>
+  <div class="home"></div>
+</div></body></html>

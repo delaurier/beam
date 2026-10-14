@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Beam — Field Overview (Hue pass)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{
+  --bg:#07080A; --surface1:#0C0D0F; --surface2:#111214; --surface3:#1B1C1E; --surface4:#2F3031;
+  --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
+  --text1:#F4F4F6; --text2:#C2C7CA; --text3:#78787C; --text4:#5E6366;
+  --accent:#FF6363; --accent-soft:rgba(255,99,99,.15); --info:#56C2FF;
+  --success:#59D498; --warning:#FFC533; --danger:#FF6161;
+  --sans:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#333;display:flex;justify-content:center;padding:0;}
+.phone{position:relative;width:402px;height:874px;background:var(--bg);border-radius:48px;overflow:hidden;font-family:var(--sans);}
+.status{display:flex;align-items:center;justify-content:space-between;height:54px;padding:18px 28px 0;}
+.status .time{font-size:15px;font-weight:600;color:var(--text1);}
+.status .right{display:flex;align-items:center;gap:6px;}
+.status .net{font-family:var(--mono);font-size:11px;color:var(--text2);}
+.batt{width:24px;height:12px;border:1px solid var(--border-strong);border-radius:3px;padding:1.5px;}
+.batt div{width:70%;height:100%;background:var(--text2);border-radius:1.5px;}
+.header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px 6px;}
+.header .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--text3);margin-bottom:5px;}
+.header h1{font-size:28px;line-height:31px;letter-spacing:-.02em;font-weight:600;color:var(--text1);}
+.avatar{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(135deg,#FF6363,#B84FA0);font-size:18px;color:#fff;}
+.kpis{display:flex;gap:10px;padding:12px 24px;}
+.kpi{flex:1;display:flex;flex-direction:column;gap:5px;padding:13px 14px;background:var(--surface1);border:1px solid var(--border);border-radius:12px;}
+.kpi .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--text3);}
+.kpi .num{font-size:26px;line-height:28px;letter-spacing:-.02em;font-weight:600;color:var(--text1);}
+.kpi .cap{font-size:10px;white-space:nowrap;color:var(--text3);}
+.kpi .cap.up{color:var(--success);}
+.featured{position:relative;height:216px;margin:6px 24px;border-radius:16px;overflow:hidden;border:1px solid var(--border-strong);display:flex;flex-direction:column;justify-content:space-between;}
+.featured img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6);}
+.featured .duo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,36,24,.55),rgba(7,8,10,.85) 78%);}
+.fhead{position:relative;display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0;}
+.fhead .name{font-size:17px;font-weight:600;color:var(--text1);}
+.fhead .meta{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--text2);margin-top:2px;}
+.live{display:flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:999px;background:rgba(89,212,152,.18);}
+.live i{width:6px;height:6px;border-radius:50%;background:var(--success);}
+.live span{font-family:var(--mono);font-size:10px;color:var(--success);}
+.chart{position:relative;height:96px;margin:0 16px;}
+.chart .grid{position:absolute;left:0;right:0;border-top:1px dashed rgba(255,255,255,.09);}
+.chart .glabel{position:absolute;left:0;font-family:var(--mono);font-size:9px;color:var(--text4);transform:translateY(-110%);}
+.valchip{position:absolute;right:-6px;top:8px;display:flex;align-items:center;height:20px;padding:0 7px;border-radius:6px;background:var(--success);color:#07080A;font-family:var(--mono);font-size:11px;font-weight:500;}
+.enddot{position:absolute;right:-2px;top:20px;width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 0 3px rgba(89,212,152,.25);}
+.ffoot{position:relative;display:flex;align-items:center;gap:8px;padding:0 16px 13px;}
+.ffoot i{width:7px;height:7px;border-radius:50%;background:var(--warning);}
+.ffoot .txt{font-size:13px;color:var(--text2);}
+.ffoot .tag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--text3);}
+.list{display:flex;flex-direction:column;gap:8px;padding:14px 24px 0;}
+.listhead{display:flex;align-items:center;justify-content:space-between;}
+.listhead .l{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--text3);}
+.listhead .r{font-size:12px;color:var(--info);}
+.row{display:flex;align-items:center;gap:12px;height:52px;padding:0 14px;background:var(--surface1);border:1px solid var(--border);border-radius:12px;}
+.row i{width:8px;height:8px;flex-shrink:0;border-radius:50%;}
+.row .body{flex:1;display:flex;flex-direction:column;gap:1px;}
+.row .t{font-size:14px;font-weight:500;color:var(--text1);}
+.row .s{font-size:11px;color:var(--text3);}
+.row .pct{width:52px;flex-shrink:0;text-align:right;font-family:var(--mono);font-size:12px;color:var(--text2);}
+.row.alert{background:rgba(255,97,97,.07);border-color:rgba(255,97,97,.28);}
+.row.alert .s{color:var(--danger);}
+.row.warn .s{color:var(--warning);}
+.tonight{display:flex;align-items:center;gap:10px;margin:12px 24px 0;padding:12px 14px;background:var(--surface1);border:1px solid var(--border);border-radius:12px;}
+.tonight .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--text3);}
+.tonight .val{font-size:13px;color:var(--text2);}
+.tonight .spacer{flex:1;}
+.btn{display:flex;align-items:center;justify-content:center;height:32px;padding:0 14px;border-radius:8px;background:rgba(255,255,255,.9);color:#18191A;font-size:12px;font-weight:500;box-shadow:inset 0 1px 1px rgba(255,255,255,.35);}
+.ask{position:absolute;left:24px;bottom:34px;width:354px;display:flex;align-items:center;gap:10px;height:52px;padding:0 18px;border-radius:999px;
+ background:linear-gradient(137deg,rgba(27,28,30,.92),rgba(12,13,15,.94));border:1px solid var(--border-strong);
+ box-shadow:0 12px 40px 8px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.08);}
+.ask .glyph{width:16px;height:16px;flex-shrink:0;border:1.5px solid var(--text3);border-radius:50%;}
+.ask .ph{flex:1;font-size:14px;color:var(--text3);}
+.mic{display:flex;align-items:flex-end;gap:2px;height:16px;}
+.mic span{width:2.5px;border-radius:2px;background:var(--accent);}
+.mic span:nth-child(1){height:7px;}.mic span:nth-child(2){height:14px;}.mic span:nth-child(3){height:10px;}.mic span:nth-child(4){height:15px;}.mic span:nth-child(5){height:6px;}
+.home{position:absolute;left:134px;bottom:9px;width:134px;height:5px;border-radius:999px;background:rgba(255,255,255,.25);}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="status"><div class="time">9:41</div><div class="right"><div class="net">5G</div><div class="batt"><div></div></div></div></div>
+  <div class="header">
+    <div><div class="eyebrow">TUE JUL 14 · 62°F CLEAR</div><h1>Morning, North Farm</h1></div>
+    <div class="avatar">✳</div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><div class="lbl">MOISTURE</div><div class="num">34%</div><div class="cap up">▲ 3% overnight</div></div>
+    <div class="kpi"><div class="lbl">CANOPY</div><div class="num">0.72</div><div class="cap">NDVI · healthy</div></div>
+    <div class="kpi"><div class="lbl">SENSORS</div><div class="num">48</div><div class="cap">all reporting</div></div>
+  </div>
+  <div class="featured">
+    <img src="../beam-assets/misty-fence.jpg">
+    <div class="duo"></div>
+    <div class="fhead">
+      <div><div class="name">North Quarter · Corn</div><div class="meta">64 AC · 12 SENSORS · ZONE 4</div></div>
+      <div class="live"><i></i><span>LIVE</span></div>
+    </div>
+    <div class="chart">
+      <div class="grid" style="top:22px;"><span class="glabel">35%</span></div>
+      <div class="grid" style="top:72px;"><span class="glabel">25%</span></div>
+      <svg width="322" height="96" viewBox="0 0 322 96" style="position:absolute;left:0;top:0;">
+        <polygon points="0,72 36,66 72,70 108,52 144,58 180,40 216,46 252,30 288,36 314,22 314,96 0,96" fill="rgba(89,212,152,.12)"/>
+        <polyline points="0,72 36,66 72,70 108,52 144,58 180,40 216,46 252,30 288,36 314,22" fill="none" stroke="#59D498" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="enddot" style="right:2px;top:18px;"></div>
+      <div class="valchip" style="right:-4px;top:-6px;">34%</div>
+    </div>
+    <div class="ffoot"><i></i><div class="txt">Irrigation window opens in 2h 10m</div><div class="tag">7-DAY</div></div>
+  </div>
+  <div class="list">
+    <div class="listhead"><div class="l">ALL FIELDS</div><div class="r">Map view</div></div>
+    <div class="row alert"><i style="background:var(--danger);"></i><div class="body"><div class="t">Orchard Block · Apple</div><div class="s">Frost watch tonight · 34°F at 4am</div></div><div class="pct">27%</div></div>
+    <div class="row warn"><i style="background:var(--warning);"></i><div class="body"><div class="t">Creek Bend · Wheat</div><div class="s">Dry zone forming · NE corner</div></div><div class="pct">22%</div></div>
+    <div class="row"><i style="background:var(--success);"></i><div class="body"><div class="t">South Ridge · Soy</div><div class="s">On schedule · irrigated 6h ago</div></div><div class="pct">31%</div></div>
+  </div>
+  <div class="tonight">
+    <div><div class="lbl">TONIGHT</div><div class="val">Low 34°F · wind 4 mph · clear</div></div>
+    <div class="spacer"></div>
+    <div class="btn">Arm frost fans</div>
+  </div>
+  <div class="ask"><div class="glyph"></div><div class="ph">Ask Beam anything…</div><div class="mic"><span></span><span></span><span></span><span></span><span></span></div></div>
+  <div class="home"></div>
+</div>
+</body>
+</html>
