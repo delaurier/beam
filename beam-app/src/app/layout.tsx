@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Agentation } from "agentation";
+import { SiteSwitch } from "@/components/site-switch";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"], weight: ["500", "600", "800"] });
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="guide flex min-h-full flex-col bg-canvas text-fg">
         {children}
+        <SiteSwitch raised={process.env.NODE_ENV === "development"} />
         {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
       </body>
     </html>

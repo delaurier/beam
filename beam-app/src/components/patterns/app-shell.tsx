@@ -2,7 +2,7 @@
 
 import { Combobox } from "@base-ui/react/combobox";
 import { Dialog } from "@base-ui/react/dialog";
-import { BookOpen, DollarSign, FileText, LayoutDashboard, MapPin, Menu as MenuIcon, PanelLeft, Plus, Search, SlidersHorizontal, Sprout, Wrench, X, type LucideIcon } from "lucide-react";
+import { DollarSign, FileText, LayoutDashboard, MapPin, Menu as MenuIcon, PanelLeft, Plus, Search, SlidersHorizontal, Sprout, Wrench, X, type LucideIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { PAGES, type Page } from "@/lib/farm";
@@ -119,9 +119,6 @@ function Sidebar({ onNavigate, onCollapse }: { onNavigate?: () => void; onCollap
       <div className="flex-1" />
       <div className="flex flex-col gap-xxs pt-s divider-t">
         {top("Settings")}
-        <NavLink href="/docs/getting-started/introduction" icon={BookOpen} onClick={onNavigate}>
-          Design system
-        </NavLink>
         {onCollapse ? (
           <button type="button" onClick={onCollapse} className="flex items-center gap-xs rounded-s px-s py-xs text-left font-ui text-m font-ui-regular text-fg transition-colors motion-small hover:bg-highlight">
             <Icon icon={PanelLeft} />

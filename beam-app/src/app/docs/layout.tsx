@@ -21,9 +21,6 @@ export default function DocsLayout({ children }: LayoutProps<"/docs">) {
           <ButtonLink variant="ghost" href="/icons">
             Icons
           </ButtonLink>
-          <ButtonLink variant="ghost" href="/app">
-            App
-          </ButtonLink>
           <ButtonLink variant="ghost" href="/llms.txt">
             llms.txt
           </ButtonLink>
