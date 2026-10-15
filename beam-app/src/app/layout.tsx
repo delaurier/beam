@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Agentation } from "agentation";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"], weight: ["500", "600", "800"] });
@@ -19,7 +20,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="guide flex min-h-full flex-col bg-canvas text-fg">{children}</body>
+      <body className="guide flex min-h-full flex-col bg-canvas text-fg">
+        {children}
+        {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
+      </body>
     </html>
   );
 }
